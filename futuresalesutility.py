@@ -76,7 +76,7 @@ def add_lag_feature(
 
     """
     grouping_fields = list_if_not(grouping_fields)
-#     feature_series = feature_series.copy()
+    feature_series = feature_series.copy()  # This is necessary
     if add_suffix:
         feature_name = feature_series.name + "_lag_" + str(lag)
         feature_series.name = feature_name
