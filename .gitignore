@@ -137,3 +137,4 @@ competitive-data-science-predict-future-sales/item_categories.csv
 Predict_Future_Sales_extra/sim_item_features_w_missing.csv
 Predict_Future_Sales_extra/shops_extra.csv
 Predict_Future_Sales_extra/item_categories_enhanced.csv
+*.csv
