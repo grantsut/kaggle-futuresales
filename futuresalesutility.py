@@ -13,7 +13,9 @@ def reduce_mem_usage(df, silent=True, allow_categorical=True, float_dtype="float
         """
         Downcast a numeric series into either the smallest possible int dtype or specified float.
         """
-        if pd.api.types.is_numeric_dtype(series.dtype) is False:
+        if pd.api.types.is_sparse(series.dtype) is True:
+            return series
+        elif pd.api.types.is_numeric_dtype(series.dtype) is False:
             if pd.api.types.is_datetime64_any_dtype(series.dtype):
                 return series
             else:
