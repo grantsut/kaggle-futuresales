@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
-from tqdm.notebook import tqdm
 
-def reduce_mem_usage(df, silent=True, allow_categorical=True, float_dtype="float32"):
+def reduce_mem_usage(df, silent=True, allow_categorical=True, float_dtype="float16"):
     """ 
     Iterates through all the columns of a dataframe and modify the data type
      to reduce memory usage. Can also factorize categorical columns to integer.
@@ -14,7 +13,9 @@ def reduce_mem_usage(df, silent=True, allow_categorical=True, float_dtype="float
         """
         Downcast a numeric series into either the smallest possible int dtype or specified float.
         """
-        if pd.api.types.is_numeric_dtype(series.dtype) is False:
+        if pd.api.types.is_sparse(series.dtype) is True:
+            return series
+        elif pd.api.types.is_numeric_dtype(series.dtype) is False:
             if pd.api.types.is_datetime64_any_dtype(series.dtype):
                 return series
             else:
@@ -119,6 +120,7 @@ def add_lag_feature(
 def apply_lags(df, feature_series, grouping_fields, lags, fillna=0):
     # Joins a series to df by multiple lag values
     feat_name = feature_series.name
-    for lag in tqdm(lags, desc=f"Applying lags for {feat_name}"):
+    print(f"Applying lags for {feat_name}")
+    for lag in lags:
         df = add_lag_feature(df, feature_series, grouping_fields, lag, fillna=fillna)
     return df
