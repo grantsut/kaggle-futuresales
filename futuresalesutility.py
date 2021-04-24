@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-def reduce_mem_usage(df, silent=True, allow_categorical=True, float_dtype="float16"):
+def reduce_mem_usage(df, silent=True, allow_categorical=True, float_dtype="float32"):
     """ 
     Iterates through all the columns of a dataframe and modify the data type
      to reduce memory usage. Can also factorize categorical columns to integer.
