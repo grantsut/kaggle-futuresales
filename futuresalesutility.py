@@ -6,9 +6,6 @@ def reduce_mem_usage(df, silent=True, allow_categorical=True, float_dtype="float
     Iterates through all the columns of a dataframe and modify the data type
      to reduce memory usage. Can also factorize categorical columns to integer.
     """
-    # To prevent slice / copy warnings
-#     df = df.copy()
-
     def _downcast_numeric(series, allow_categorical=allow_categorical):
         """
         Downcast a numeric series into either the smallest possible int dtype or specified float.
